@@ -8,18 +8,19 @@ namespace MyCoach.Tests
 
         public ExerciceServiceTests()
         {
-            _exerciceService = new ExerciceService();
+            var jsonPath = Path.Combine(AppContext.BaseDirectory, "TestData", "exercices.json");
+            _exerciceService = new ExerciceService(jsonPath);
         }
 
         [Fact]
         public void GetAllExercices_ShouldReturnAllExercices()
         {
             // Act
-            var exercices = _exerciceService.GetAllExercices();
+            var exercices = _exerciceService.GetAll();
             // Assert
             Assert.NotNull(exercices);
             Assert.NotEmpty(exercices);
-            Assert.Equal(3, exercices.Count());
+            Assert.Equal(4, exercices.Count());
         }
 
         [Theory]
@@ -29,7 +30,7 @@ namespace MyCoach.Tests
         public void GetExerciceById_ShouldReturnExercice_WhenIdExists(int id)
         {
             // Act
-            var exercice = _exerciceService.GetExerciceById(id);
+            var exercice = _exerciceService.GetById(id);
             // Assert
             Assert.NotNull(exercice);
             Assert.Equal(id, exercice?.Id);
@@ -39,7 +40,7 @@ namespace MyCoach.Tests
         public void GetExerciceById_ShouldReturnNull_WhenIdDoesNotExist()
         {
             // Act
-            var exercice = _exerciceService.GetExerciceById(999);
+            var exercice = _exerciceService.GetById(999);
             // Assert
             Assert.Null(exercice);
         }

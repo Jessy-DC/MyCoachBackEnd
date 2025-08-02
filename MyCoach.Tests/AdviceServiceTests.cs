@@ -8,17 +8,19 @@ namespace MyCoach.Tests
         private readonly AdviceService _adviceService;
         public AdviceServiceTests()
         {
-            _adviceService = new AdviceService();
+            var jsonPath = Path.Combine(AppContext.BaseDirectory, "TestData", "advices.json");
+            _adviceService = new AdviceService(jsonPath);
         }
+
         [Fact]
         public void GetAllAdvices_ShouldReturnAllAdvices()
         {
             // Act
-            var advices = _adviceService.GetAllAdvices();
+            var advices = _adviceService.GetAll();
             // Assert
             Assert.NotNull(advices);
             Assert.NotEmpty(advices);
-            Assert.Equal(3, advices.Count());
+            Assert.Equal(4, advices.Count());
         }
         [Theory]
         [InlineData(1)]
@@ -27,7 +29,7 @@ namespace MyCoach.Tests
         public void GetAdviceById_ShouldReturnAdvice_WhenIdExists(int id)
         {
             // Act
-            var advice = _adviceService.GetAdviceById(id);
+            var advice = _adviceService.GetById(id);
             // Assert
             Assert.NotNull(advice);
             Assert.Equal(id, advice?.Id);
@@ -36,7 +38,7 @@ namespace MyCoach.Tests
         public void GetAdviceById_ShouldReturnNull_WhenIdDoesNotExist()
         {
             // Act
-            var advice = _adviceService.GetAdviceById(999);
+            var advice = _adviceService.GetById(999);
             // Assert
             Assert.Null(advice);
         }

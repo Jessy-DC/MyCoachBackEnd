@@ -1,0 +1,42 @@
+[
+  {
+    "Id": 1,
+    "Title": "Squats",
+    "Description": "Exercice de base pour renforcer les jambes et les fessiers.",
+    "Category": "Bas du corps",
+    "Duration": 5,
+    "Difficulty": "Facile",
+    "Equipment": "Aucun",
+    "TargetMuscleGroup": "Quadriceps"
+  },
+  {
+    "Id": 2,
+    "Title": "Pompes",
+    "Description": "Exercice classique pour renforcer les pectoraux et les triceps.",
+    "Category": "Haut du corps",
+    "Duration": 4,
+    "Difficulty": "Intermédiaire",
+    "Equipment": "Aucun",
+    "TargetMuscleGroup": "Pectoraux"
+  },
+  {
+    "Id": 3,
+    "Title": "Planche",
+    "Description": "Exercice statique pour am�liorer le gainage abdominal.",
+    "Category": "Tronc",
+    "Duration": 2,
+    "Difficulty": "Difficile",
+    "Equipment": "Tapis",
+    "TargetMuscleGroup": "Abdominaux"
+  },
+  {
+    "Id": 4,
+    "Title": "Rowing haltères",
+    "Description": "Exercice pour muscler le dos avec des haltères.",
+    "Category": "Dos",
+    "Duration": 6,
+    "Difficulty": "Intermédiaire",
+    "Equipment": "Haltères",
+    "TargetMuscleGroup": "Dorsaux"
+  }
+]

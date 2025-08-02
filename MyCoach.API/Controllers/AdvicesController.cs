@@ -21,7 +21,7 @@ namespace MyCoach.API.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<AdviceDto>> GetAllAdvices()
         {
-            var advices = _adviceService.GetAllAdvices();
+            var advices = _adviceService.GetAll();
 
             if (advices == null || !advices.Any())
             {
@@ -35,7 +35,7 @@ namespace MyCoach.API.Controllers
         [HttpGet("{id:int}")]
         public ActionResult<AdviceDto> GetAdviceById(int id)
         {
-            var advice = _adviceService.GetAdviceById(id);
+            var advice = _adviceService.GetById(id);
 
             if (advice == null)
             {

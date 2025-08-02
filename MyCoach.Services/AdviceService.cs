@@ -1,38 +1,26 @@
 ﻿using MyCoach.DTOs;
 using MyCoach.Interfaces;
+using System.Text.Json;
 
 namespace MyCoach.Services
 {
     public class AdviceService : IAdviceService
     {
+        private readonly string _jsonPath;
 
-        private readonly List<AdviceDto> _advices = new()
+        public AdviceService(string jsonPath = null)
         {
-            new AdviceDto
-            {
-                Id = 1,
-                Title = "Stay Hydrated",
-                Description = "Drink plenty of water throughout the day to stay hydrated.",
-                Category = "Health"
-            },
-            new AdviceDto
-            {
-                Id = 2,
-                Title = "Balanced Diet",
-                Description = "Maintain a balanced diet with a variety of nutrients.",
-                Category = "Nutrition"
-            },
-            new AdviceDto
-            {
-                Id = 3,
-                Title = "Regular Exercise",
-                Description = "Engage in regular physical activity to improve overall health.",
-                Category = "Fitness"
-            }
-        };
-        
-        public IEnumerable<AdviceDto> GetAllAdvices() => _advices;
+            _jsonPath = jsonPath ?? Path.Combine(AppContext.BaseDirectory, "Data", "advices.json");
+        }
 
-        public AdviceDto? GetAdviceById(int id) => _advices.FirstOrDefault(a => a.Id == id);
+        public IEnumerable<AdviceDto> GetAll()
+        {
+            var json = File.ReadAllText(_jsonPath);
+            return JsonSerializer.Deserialize<List<AdviceDto>>(json) ?? new List<AdviceDto>();
+        }
+
+
+        public AdviceDto? GetById(int id) =>
+            GetAll().FirstOrDefault(a => a.Id == id);
     }
 }

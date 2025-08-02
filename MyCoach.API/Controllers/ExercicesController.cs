@@ -18,7 +18,7 @@ namespace MyCoach.API.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<ExerciceDto>> GetAllExercices()
         {
-            var exercices = _exerciceService.GetAllExercices();
+            var exercices = _exerciceService.GetAll();
 
             return Ok(exercices);
         }
@@ -26,7 +26,7 @@ namespace MyCoach.API.Controllers
         [HttpGet("{id:int}")]
         public ActionResult<ExerciceDto> GetExerciceById(int id)
         {
-            var exercice = _exerciceService.GetExerciceById(id);
+            var exercice = _exerciceService.GetById(id);
 
             if (exercice == null)
             {
