@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: mycoach-backend
+    runtime: docker
+    plan: free
+    region: frankfurt
+    repo: https://github.com/Jessy-DC/MyCoachBackEnd
+    branch: main
+    rootDir: MyCoach.API
+    autoDeploy: true
