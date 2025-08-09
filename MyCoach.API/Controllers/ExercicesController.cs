@@ -16,22 +16,27 @@ namespace MyCoach.API.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<ExerciceDto>> GetAllExercices()
+        [ProducesResponseType(typeof(IEnumerable<ExerciceDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<IEnumerable<ExerciceDto>>> GetAllExercices(CancellationToken ct)
         {
-            var exercices = _exerciceService.GetAll();
+            var exercices = await _exerciceService.GetAllAsync(ct);
+
+            if (exercices == null || !exercices.Any())
+                return NotFound("No advices found.");
 
             return Ok(exercices);
         }
 
         [HttpGet("{id:int}")]
-        public ActionResult<ExerciceDto> GetExerciceById(int id)
+        [ProducesResponseType(typeof(ExerciceDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<AdviceDto>> GetExerciceById(int id, CancellationToken ct)
         {
-            var exercice = _exerciceService.GetById(id);
+            var exercice = await _exerciceService.GetByIdAsync(id, ct);
 
-            if (exercice == null)
-            {
-                return NotFound();
-            }
+            if (exercice is null)
+                return NotFound($"Exercice with ID {id} not found.");
 
             return Ok(exercice);
         }

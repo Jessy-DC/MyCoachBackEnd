@@ -4,7 +4,7 @@ namespace MyCoach.Interfaces
 {
     public interface IAdviceService
     {
-        IEnumerable<AdviceDto> GetAll();
-        AdviceDto? GetById(int id);
+        Task<IEnumerable<AdviceDto>> GetAllAsync(CancellationToken ct);
+        Task<AdviceDto?> GetByIdAsync(int id, CancellationToken ct);
     }
 }

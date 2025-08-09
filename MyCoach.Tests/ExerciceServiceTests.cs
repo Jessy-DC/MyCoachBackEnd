@@ -1,4 +1,8 @@
+using Moq;
+using MyCoach.API.Storage;
+using MyCoach.DTOs;
 using MyCoach.Services;
+using System.Text.Json;
 
 namespace MyCoach.Tests
 {
@@ -8,18 +12,29 @@ namespace MyCoach.Tests
 
         public ExerciceServiceTests()
         {
-            var jsonPath = Path.Combine(AppContext.BaseDirectory, "TestData", "exercices.json");
-            _exerciceService = new ExerciceService(jsonPath);
+            // 1) Charger le JSON de test (copié dans le dossier de sortie)
+            var path = Path.Combine(AppContext.BaseDirectory, "TestData", "exercices.json");
+            var json = File.ReadAllText(path);
+            var data = JsonSerializer.Deserialize<List<ExerciceDto>>(json) ?? new List<ExerciceDto>();
+
+            // 2) Mock du IJsonStore
+            var store = new Mock<IJsonStore>();
+
+            // Le service appelle ReadAsync<List<AdviceDto>> avec le nom de fichier "advices.json"
+            store.Setup(s => s.ReadAsync<List<ExerciceDto>>(
+                    "exercices.json",
+                    It.IsAny<CancellationToken>()))
+                 .ReturnsAsync(data);
+
+            // 3) Injecter le mock dans le service
+            _exerciceService = new ExerciceService(store.Object);
         }
 
         [Fact]
-        public void GetAllExercices_ShouldReturnAllExercices()
+        public async Task GetAllExercices_ShouldReturnAllExercices()
         {
-            // Act
-            var exercices = _exerciceService.GetAll();
-            // Assert
+            var exercices = await _exerciceService.GetAllAsync();
             Assert.NotNull(exercices);
-            Assert.NotEmpty(exercices);
             Assert.Equal(4, exercices.Count());
         }
 
@@ -27,20 +42,19 @@ namespace MyCoach.Tests
         [InlineData(1)]
         [InlineData(2)]
         [InlineData(3)]
-        public void GetExerciceById_ShouldReturnExercice_WhenIdExists(int id)
+        public async Task GetExerciceById_ShouldReturnExercice_WhenIdExists(int id)
         {
-            // Act
-            var exercice = _exerciceService.GetById(id);
-            // Assert
+            var exercice = await _exerciceService.GetByIdAsync(id);
             Assert.NotNull(exercice);
             Assert.Equal(id, exercice?.Id);
         }
 
         [Fact]
-        public void GetExerciceById_ShouldReturnNull_WhenIdDoesNotExist()
+        public async Task GetExerciceById_ShouldReturnNull_WhenIdDoesNotExist()
         {
             // Act
-            var exercice = _exerciceService.GetById(999);
+            var exercice = await _exerciceService.GetByIdAsync(999);
+
             // Assert
             Assert.Null(exercice);
         }

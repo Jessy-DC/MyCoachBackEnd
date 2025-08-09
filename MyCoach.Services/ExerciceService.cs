@@ -1,23 +1,22 @@
-﻿using MyCoach.DTOs;
+﻿using MyCoach.API.Storage;
+using MyCoach.DTOs;
 using MyCoach.Interfaces;
-using System.Text.Json;
+
 namespace MyCoach.Services
 {
     public class ExerciceService : IExerciceService
     {
-        private readonly string _jsonPath;
+        private readonly IJsonStore _store;
+        private const string FileName = "exercices.json";
+        public ExerciceService(IJsonStore store) => _store = store;
 
-        public ExerciceService(string jsonPath = null)
+        public async Task<IEnumerable<ExerciceDto>> GetAllAsync(CancellationToken ct = default)
+            => await _store.ReadAsync<List<ExerciceDto>>(FileName, ct) ?? new List<ExerciceDto>();
+
+        public async Task<ExerciceDto?> GetByIdAsync(int id, CancellationToken ct = default)
         {
-            _jsonPath = jsonPath ?? Path.Combine(AppContext.BaseDirectory, "Data", "exercices.json");
+            var all = await GetAllAsync(ct);
+            return all.FirstOrDefault(a => a.Id == id);
         }
-
-        public IEnumerable<ExerciceDto> GetAll()
-        {
-            var json = File.ReadAllText(_jsonPath);
-            return JsonSerializer.Deserialize<List<ExerciceDto>>(json) ?? new List<ExerciceDto>();
-        }
-
-        public ExerciceDto? GetById(int id) => GetAll().FirstOrDefault(e => e.Id == id);
     }
 }

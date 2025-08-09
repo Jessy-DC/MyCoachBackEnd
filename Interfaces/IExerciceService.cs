@@ -4,7 +4,7 @@ namespace MyCoach.Interfaces
 {
     public interface IExerciceService
     {
-        IEnumerable<ExerciceDto> GetAll();
-        ExerciceDto? GetById(int id);
+        Task<IEnumerable<ExerciceDto>> GetAllAsync(CancellationToken ct);
+        Task<ExerciceDto?> GetByIdAsync(int id, CancellationToken ct);
     }
 }

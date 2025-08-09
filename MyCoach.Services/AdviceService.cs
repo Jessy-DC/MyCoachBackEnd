@@ -1,26 +1,22 @@
-﻿using MyCoach.DTOs;
+﻿using MyCoach.API.Storage;
+using MyCoach.DTOs;
 using MyCoach.Interfaces;
-using System.Text.Json;
 
 namespace MyCoach.Services
 {
     public class AdviceService : IAdviceService
     {
-        private readonly string _jsonPath;
+        private readonly IJsonStore _store;
+        private const string FileName = "advices.json";
+        public AdviceService(IJsonStore store) => _store = store;
 
-        public AdviceService(string jsonPath = null)
+        public async Task<IEnumerable<AdviceDto>> GetAllAsync(CancellationToken ct = default)
+            => await _store.ReadAsync<List<AdviceDto>>(FileName, ct) ?? new List<AdviceDto>();
+
+        public async Task<AdviceDto?> GetByIdAsync(int id, CancellationToken ct = default)
         {
-            _jsonPath = jsonPath ?? Path.Combine(AppContext.BaseDirectory, "Data", "advices.json");
+            var all = await GetAllAsync(ct);
+            return all.FirstOrDefault(a => a.Id == id);
         }
-
-        public IEnumerable<AdviceDto> GetAll()
-        {
-            var json = File.ReadAllText(_jsonPath);
-            return JsonSerializer.Deserialize<List<AdviceDto>>(json) ?? new List<AdviceDto>();
-        }
-
-
-        public AdviceDto? GetById(int id) =>
-            GetAll().FirstOrDefault(a => a.Id == id);
     }
 }

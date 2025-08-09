@@ -1,7 +1,19 @@
+using MyCoach.API.Storage;
 using MyCoach.Interfaces; // Ensure this using directive is present
 using MyCoach.Services;   // Ensure this using directive is present
 
 var builder = WebApplication.CreateBuilder(args);
+
+var jsonPath = Environment.GetEnvironmentVariable("JSON_DATA_PATH");
+if (string.IsNullOrWhiteSpace(jsonPath))
+{
+    jsonPath = Path.Combine(AppContext.BaseDirectory, "Data");
+}
+Directory.CreateDirectory(jsonPath);
+
+// 2) Enregistrement du store concret
+builder.Services.AddSingleton(new JsonStorageOptions { RootPath = jsonPath });
+builder.Services.AddSingleton<IJsonStore, FileJsonStore>();
 
 // Add services to the container.
 builder.Services.AddScoped<IExerciceService, ExerciceService>(); // Ensure ExerciceService implements IExerciceService
@@ -23,6 +35,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.MapGet("/health", () => Results.Ok("OK"));
 
 app.MapControllers();
 
