@@ -1,26 +1,26 @@
 [
   {
     "Id": 1,
-    "Title": "Hydrate-toi r�guli�rement",
-    "Description": "Boire de l'eau pendant et apr�s l'effort favorise la r�cup�ration et pr�vient les blessures.",
+    "Title": "Hydrate-toi régulièrement",
+    "Description": "Boire de l'eau pendant et apr s l'effort favorise la r cup ration et prévient les blessures.",
     "Category": "Hydratation"
   },
   {
     "Id": 2,
-    "Title": "Mange des prot�ines apr�s ta s�ance",
-    "Description": "Les prot�ines participent � la r�paration musculaire et am�liorent les r�sultats de l'entra�nement.",
+    "Title": "Mange des protéines après ta séance",
+    "Description": "Les protéines participent à la réparation musculaire et améliorent les résultats de l'entraînement.",
     "Category": "Nutrition"
   },
   {
     "Id": 3,
-    "Title": "Ne n�glige pas ton sommeil",
+    "Title": "Ne néglige pas ton sommeil",
     "Description": "Un bon sommeil permet une meilleure progression et diminue les risques de surmenage.",
-    "Category": "R�cup�ration"
+    "Category": "Récupération"
   },
   {
     "Id": 4,
-    "Title": "Fixe-toi des objectifs r�alistes",
-    "Description": "Commencer doucement est le meilleur moyen d�adopter une pratique durable et motivante.",
+    "Title": "Fixe-toi des objectifs réalistes",
+    "Description": "Commencer doucement est le meilleur moyen d'adopter une pratique durable et motivante.",
     "Category": "Motivation"
   }
 ]
