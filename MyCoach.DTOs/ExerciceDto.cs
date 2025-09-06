@@ -10,7 +10,7 @@
         public string Category { get; set; } = string.Empty;
         public int Duration { get; set; } // Duration in minutes
         public string Difficulty { get; set; } = string.Empty;
-        public string Equipment { get; set; } = string.Empty;
+        public List<EquipmentDto> Equipments { get; set; } = new List<EquipmentDto>();
         public string TargetMuscleGroup { get; set; } = string.Empty;
     }
 }

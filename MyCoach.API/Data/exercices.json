@@ -6,7 +6,7 @@
     "Category": "Bas du corps",
     "Duration": 5,
     "Difficulty": "Facile",
-    "Equipment": "Aucun",
+    "Equipments": [],
     "TargetMuscleGroup": "Quadriceps"
   },
   {
@@ -16,7 +16,7 @@
     "Category": "Haut du corps",
     "Duration": 4,
     "Difficulty": "Intermédiaire",
-    "Equipment": "Aucun",
+    "Equipments": [],
     "TargetMuscleGroup": "Pectoraux"
   },
   {
@@ -26,7 +26,12 @@
     "Category": "Tronc",
     "Duration": 2,
     "Difficulty": "Difficile",
-    "Equipment": "Tapis",
+    "Equipments": [
+      {
+        "Id": 8,
+        "Nom": "Tapis de sol"
+      }
+    ],
     "TargetMuscleGroup": "Abdominaux"
   },
   {
@@ -36,7 +41,12 @@
     "Category": "Dos",
     "Duration": 6,
     "Difficulty": "Intermédiaire",
-    "Equipment": "Haltères",
+    "Equipments": [
+      {
+        "Id": 1,
+        "Nom": "Haltères"
+      }
+    ],
     "TargetMuscleGroup": "Dorsaux"
   }
 ]

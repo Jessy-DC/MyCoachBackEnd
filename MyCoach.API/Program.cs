@@ -18,6 +18,7 @@ builder.Services.AddSingleton<IJsonStore, FileJsonStore>();
 // Add services to the container.
 builder.Services.AddScoped<IExerciceService, ExerciceService>(); // Ensure ExerciceService implements IExerciceService
 builder.Services.AddScoped<IAdviceService, AdviceService>(); // Ensure ExerciceService implements IExerciceService
+builder.Services.AddScoped<IEquipmentService, EquipmentService>(); // Add EquipmentService
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

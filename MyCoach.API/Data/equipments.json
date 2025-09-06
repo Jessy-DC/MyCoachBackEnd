@@ -1,0 +1,34 @@
+[
+  {
+    "Id": 1,
+    "Nom": "Haltères"
+  },
+  {
+    "Id": 2,
+    "Nom": "Barre de musculation"
+  },
+  {
+    "Id": 3,
+    "Nom": "Machine à câbles"
+  },
+  {
+    "Id": 4,
+    "Nom": "Kettlebell"
+  },
+  {
+    "Id": 5,
+    "Nom": "Élastiques de résistance"
+  },
+  {
+    "Id": 6,
+    "Nom": "Banc de musculation"
+  },
+  {
+    "Id": 7,
+    "Nom": "Barre de traction"
+  },
+  {
+    "Id": 8,
+    "Nom": "Tapis de sol"
+  }
+]
